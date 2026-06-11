@@ -1,9 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{websiteRoot}}/css/index.css">
 {{> datatables}}
 
-<h1 class="title is-size-1">Armory</h1>
-
-<a href="{{websiteRoot}}/arena">Arena Ladder</a>&emsp;
+<h1 class="title is-size-1">Arla MMO armory</h1>
 
 <br><br>
 
@@ -31,6 +29,8 @@
 			<th>Class</th>
 			<th>Race</th>
 			<th>Online</th>
+			<th>Money</th>
+			<th>Time</th>
 		</tr>
 	</thead>
 	<tbody></tbody>
@@ -43,6 +43,28 @@
 		$("#select-realm").on("change", () => {
 			dt.draw();
 		});
+
+		const formatMoney = (money) => {
+            const gold = Math.floor(money / (100 * 100));
+            const silver = Math.floor((money / 100) % 100);
+            const bronze = Math.floor(money % 100);
+
+            return `${gold}🟡 ${silver}⚪ ${bronze}🟠`;
+		};
+        const formatTime = (time) => {
+            const hours = Math.floor((time / 3600) % 60);
+            const minutes = Math.floor((time / 60) % 60);
+            const seconds = Math.floor(time % 60);
+
+            if (hours > 0) {
+                return `${hours}h ${minutes}m ${seconds}s`
+            }
+            if (minutes > 0) {
+                return `${minutes}m ${seconds}s`
+            }
+
+            return `${seconds}s`
+        };
 
 		dt = $("#results").DataTable({
 			processing: true,
@@ -78,6 +100,16 @@
 					targets: 5,
 					render: online => online ? "🟢" : "🔴",
 				},
+				{
+					searchable: false,
+					targets: 6,
+					render: money => formatMoney(money),
+				},
+                {
+                    searchable: false,
+                    targets: 7,
+                    render: totaltime => formatTime(totaltime),
+                },
 			],
 			responsive: {
 				details: true,

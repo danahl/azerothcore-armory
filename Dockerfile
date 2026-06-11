@@ -1,8 +1,10 @@
 FROM node:16
 
-COPY package*.json ./
+WORKDIR /usr/app
+
+COPY azerothcore-armory/package*.json ./
 RUN npm install
 
-COPY . .
+COPY azerothcore-armory/ ./
 RUN npm run build
 CMD [ "npm", "start" ]

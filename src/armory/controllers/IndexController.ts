@@ -35,6 +35,8 @@ export class IndexController {
 			{ name: "class", formatter: (cls) => Utils.classNames[cls] },
 			{ name: "race", formatter: (race, row) => `${Utils.raceNames[race]}_${row[6] === 0 ? "male" : "female"}` },
 			{ name: "online", formatter: (online) => online === 1 },
+			{ name: "money" },
+			{ name: "totaltime" },
 		]);
 		ssp.joins = [
 			{ table1: "characters", column1: "guid", table2: "guild_member", column2: "guid", kind: "LEFT" },
@@ -54,6 +56,16 @@ export class IndexController {
 			});
 			ssp = ssp.where("`account_access`.`id` IS NULL");
 		}
+
+        ssp.joins.push({
+            table1: "characters",
+            column1: "account",
+            table2: "account",
+            column2: "id",
+            database2: realm.authDatabase,
+            kind: "LEFT",
+        });
+        ssp = ssp.where("`account`.`username` NOT LIKE 'RNDBOT%' AND `account`.`username` != 'AHBOT'");
 
 		const result = await ssp.where("`deleteInfos_Account` IS NULL").run(this.armory.config.dbQueryTimeout);
 
