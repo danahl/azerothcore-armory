@@ -45,7 +45,7 @@ export class GuildController {
 		}
 
 		res.render("guild.hbs", {
-			title: `Armory - ${guildName}`,
+			title: `Arla MMO Armory - ${guildName}`,
 			realm: realm.name,
 			...guildData,
 		});

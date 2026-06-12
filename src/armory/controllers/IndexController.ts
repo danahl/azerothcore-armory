@@ -13,7 +13,7 @@ export class IndexController {
 
 	public async index(req: express.Request, res: express.Response): Promise<void> {
 		res.render("index.hbs", {
-			title: "Armory",
+			title: "Arla MMO Armory",
 			realms: this.armory.config.realms.map((r) => r.name),
 		});
 	}
@@ -37,6 +37,7 @@ export class IndexController {
 			{ name: "online", formatter: (online) => online === 1 },
 			{ name: "money" },
 			{ name: "totaltime" },
+			{ name: "zone" },
 		]);
 		ssp.joins = [
 			{ table1: "characters", column1: "guid", table2: "guild_member", column2: "guid", kind: "LEFT" },

@@ -211,7 +211,7 @@ export class CharacterController {
 		const characterModelItems = await this.getModelViewerItems(equipmentData, charData.class, transmogs);
 
 		res.render("character.hbs", {
-			title: `Armory - ${charData.name}`,
+			title: `Arla MMO Armory - ${charData.name}`,
 			...this.makeSharedDataObject(realm, charData),
 			contentPath: this.armory.config.useZamCdn ? "https://wow.zamimg.com/modelviewer/live/" : this.armory.config.websiteRoot + "/data/",
 			data: {
@@ -247,7 +247,7 @@ export class CharacterController {
 		}
 
 		res.render("character-talents.hbs", {
-			title: `Armory - ${charData.name} - Talents`,
+			title: `Arla MMO Armory - ${charData.name} - Talents`,
 			...this.makeSharedDataObject(realm, charData),
 			data: {
 				talents: await this.getTalents(realm.name, charData.guid),
@@ -274,7 +274,7 @@ export class CharacterController {
 		}
 
 		res.render("character-achievements.hbs", {
-			title: `Armory - ${charData.name} - Achievements`,
+			title: `Arla MMO Armory - ${charData.name} - Achievements`,
 			...this.makeSharedDataObject(realm, charData),
 		});
 	}
@@ -318,7 +318,7 @@ export class CharacterController {
 		}
 
 		res.render("character-pvp.hbs", {
-			title: `Armory - ${charData.name} - PvP`,
+			title: `Arla MMO Armory - ${charData.name} - PvP`,
 			realm: realm.name,
 			...this.makeSharedDataObject(realm, charData),
 			faction: Utils.getFactionFromRaceId(charData.race),

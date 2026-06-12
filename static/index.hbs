@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{websiteRoot}}/css/index.css">
 {{> datatables}}
 
-<h1 class="title is-size-1">Arla MMO armory</h1>
+<h1 class="title is-size-1">Arla MMO Armory</h1>
 
 <br><br>
 
@@ -31,18 +31,22 @@
 			<th>Online</th>
 			<th>Money</th>
 			<th>Time</th>
+			<th>Zone</th>
 		</tr>
 	</thead>
 	<tbody></tbody>
 </table>
 
 <script type="application/javascript">
-	$(window).on("load", () => {
+	$(window).on("load", async () => {
 		let dt;
 
 		$("#select-realm").on("change", () => {
 			dt.draw();
 		});
+
+        const response = await fetch('/data/meta/zone_names.json');
+        const zoneNamesMap = await response.json();
 
 		const formatMoney = (money) => {
             const gold = Math.floor(money / (100 * 100));
@@ -70,6 +74,7 @@
 			processing: true,
 			serverSide: true,
 			searchDelay: 800,
+            lengthMenu: [50, 100],
 			ajax: {
 				url: `{{websiteRoot}}/search`,
 				data: d => {
@@ -109,6 +114,11 @@
                     searchable: false,
                     targets: 7,
                     render: totaltime => formatTime(totaltime),
+                },
+                {
+                    searchable: false,
+                    targets: 8,
+                    render: zone => zoneNamesMap[`${zone}`] ?? '',
                 },
 			],
 			responsive: {

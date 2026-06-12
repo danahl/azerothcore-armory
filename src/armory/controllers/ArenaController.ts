@@ -41,7 +41,7 @@ export class ArenaController {
 
 	public async index(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
 		res.render("ladder-arena.hbs", {
-			title: `Arena Ladder`,
+			title: `Arla MMO Armory - Arena Ladder`,
 			realms: this.armory.config.realms.map((r) => r.name),
 		});
 	}
@@ -63,7 +63,7 @@ export class ArenaController {
 		}
 
 		res.render("arena-team.hbs", {
-			title: `Armory - ${teamData.name}`,
+			title: `Arla MMO Armory - ${teamData.name}`,
 			realm: realm.name,
 			...teamData,
 		});
