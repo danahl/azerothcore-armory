@@ -21,6 +21,7 @@ interface ICharacterData {
 	playerFlags: number;
 	online: number;
 	guild: string;
+	zone?: number | string;
 }
 
 interface IEquipmentData {
@@ -330,6 +331,7 @@ export class CharacterController {
 	private makeSharedDataObject(realm: IRealmConfig, charData: ICharacterData) {
 		return {
 			realm: realm.name,
+            zone: charData.zone,
 			name: charData.name,
 			guid: charData.guid,
 			race: RaceDisplayName[charData.race],
@@ -344,7 +346,7 @@ export class CharacterController {
 		const where = typeof character === "string" ? "LOWER(`characters`.`name`) = LOWER(?)" : "`characters`.`guid` = ?";
 		const [rows] = await this.armory.getCharactersDb(realm.name).query({
 			sql: `
-				SELECT \`characters\`.\`guid\`, \`characters\`.\`name\`, \`race\`, \`class\`, \`gender\`, \`level\`, \`skin\`, \`face\`, \`hairStyle\`, \`hairColor\`, \`facialStyle\`, \`playerFlags\`, \`online\`, \`guild\`.\`name\` AS \`guild\`
+				SELECT \`characters\`.\`guid\`, \`characters\`.\`name\`, \`race\`, \`class\`, \`gender\`, \`level\`, \`skin\`, \`face\`, \`hairStyle\`, \`hairColor\`, \`facialStyle\`, \`playerFlags\`, \`online\`, \`zone\`, \`guild\`.\`name\` AS \`guild\`
 				FROM \`characters\`
 				LEFT JOIN \`guild_member\` ON \`guild_member\`.\`guid\` = \`characters\`.\`guid\`
 				LEFT JOIN \`guild\` ON \`guild\`.\`guildid\` = \`guild_member\`.\`guildid\`
