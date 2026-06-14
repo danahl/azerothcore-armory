@@ -32,6 +32,7 @@
 			<th>Money</th>
 			<th>Time</th>
 			<th>Zone</th>
+			<th>Areas</th>
 		</tr>
 	</thead>
 	<tbody></tbody>
@@ -119,6 +120,11 @@
                     searchable: false,
                     targets: 8,
                     render: zone => zoneNamesMap[`${zone}`] ?? '',
+                },
+                {
+                    searchable: false,
+                    targets: 9,
+                    render: exploredZones => exploredZones,
                 },
 			],
 			responsive: {

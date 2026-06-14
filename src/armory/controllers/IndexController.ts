@@ -38,6 +38,20 @@ export class IndexController {
 			{ name: "money" },
 			{ name: "totaltime" },
 			{ name: "zone" },
+			{
+                name: "exploredZones",
+                formatter: (exploredZones: string)=> exploredZones.trim()
+                    .split(' ')
+                    .map((n: string) => parseInt(n, 10))
+                    .reduce((acc, n) => {
+                        n = n - ((n >> 1) & 0x55555555);
+                        n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+
+                        const newZones = ((n + (n >> 4) & 0xF0F0F0F) * 0x1010101) >> 24;
+
+                        return acc + newZones;
+                    }, 0),
+            },
 		]);
 		ssp.joins = [
 			{ table1: "characters", column1: "guid", table2: "guild_member", column2: "guid", kind: "LEFT" },
