@@ -23,8 +23,8 @@
 <table id="results" class="stripe hover row-border">
 	<thead>
 		<tr>
-			<th>Online</th>
 			<th>Name</th>
+			<th>Online</th>
 			<th>Level</th>
 			<th>Class</th>
 			<th>Race</th>
@@ -82,15 +82,15 @@
 				},
 			},
 			columnDefs: [
-                {
-                    searchable: false,
-                    targets: 0,
-                    render: online => online ? "🟢" : "🔴",
-                },
 				{
-					targets: 1,
+					targets: 0,
 					render: (name, type, row, meta) => `<a href="{{websiteRoot}}/character/${meta.settings.json.realm}/${name}">${name}</a>`,
 				},
+                {
+                    searchable: false,
+                    targets: 1,
+                    render: online => online ? "🟢" : "🔴",
+                },
 				{
 					searchable: false,
 					targets: 3,

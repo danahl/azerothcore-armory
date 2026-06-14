@@ -29,8 +29,8 @@ export class IndexController {
 		const charSet = await this.armory.getDatabaseCharset(realm.name);
 
 		let ssp = new DataTablesSsp(req.query, db, "characters", "guid", [
-			{ name: "online", formatter: (online) => online === 1 },
 			{ name: "name", collation: `${charSet}_general_ci` },
+			{ name: "online", formatter: (online) => online === 1 },
 			{ name: "level" },
 			{ name: "class", formatter: (cls) => Utils.classNames[cls] },
 			{ name: "race", formatter: (race, row) => `${Utils.raceNames[race]}_${row[6] === 0 ? "male" : "female"}` },
