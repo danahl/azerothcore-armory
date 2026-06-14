@@ -25,7 +25,7 @@ export interface IIframeModeConfig {
 
 export class Config {
 	public aowowUrl: string;
-	public websiteUrl: string;
+    public websiteUrl: string;
 	public websiteName: string;
 	public websiteRoot: string;
 	public iframeMode: IIframeModeConfig;
