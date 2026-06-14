@@ -23,12 +23,12 @@
 <table id="results" class="stripe hover row-border">
 	<thead>
 		<tr>
+			<th>Online</th>
 			<th>Name</th>
-			<th>Guild</th>
 			<th>Level</th>
 			<th>Class</th>
 			<th>Race</th>
-			<th>Online</th>
+			<th>Guild</th>
 			<th>Money</th>
 			<th>Time</th>
 			<th>Zone</th>
@@ -53,7 +53,7 @@
             const silver = Math.floor((money / 100) % 100);
             const bronze = Math.floor(money % 100);
 
-            return `${gold}🟡 ${silver}⚪ ${bronze}🟠`;
+            return `${gold} 🟡 ${silver} ⚪ ${bronze} 🟠`;
 		};
         const formatTime = (time) => {
             const hours = Math.floor(time / (60 * 60));
@@ -82,13 +82,14 @@
 				},
 			},
 			columnDefs: [
-				{
-					targets: 0,
-					render: (name, type, row, meta) => `<a href="{{websiteRoot}}/character/${meta.settings.json.realm}/${name}">${name}</a>`,
-				},
+                {
+                    searchable: false,
+                    targets: 0,
+                    render: online => online ? "🟢" : "🔴",
+                },
 				{
 					targets: 1,
-					render: (guild, type, row, meta) => guild === null ? "" : `<a href="{{websiteRoot}}/guild/${meta.settings.json.realm}/${guild}">${guild}</a>`,
+					render: (name, type, row, meta) => `<a href="{{websiteRoot}}/character/${meta.settings.json.realm}/${name}">${name}</a>`,
 				},
 				{
 					searchable: false,
@@ -100,11 +101,10 @@
 					targets: 4,
 					render: data => `<img src="{{aowow}}/static/images/wow/icons/medium/race_${data}.jpg">`,
 				},
-				{
-					searchable: false,
-					targets: 5,
-					render: online => online ? "🟢" : "🔴",
-				},
+                {
+                    targets: 5,
+                    render: (guild, type, row, meta) => guild === null ? "" : `<a href="{{websiteRoot}}/guild/${meta.settings.json.realm}/${guild}">${guild}</a>`,
+                },
 				{
 					searchable: false,
 					targets: 6,
