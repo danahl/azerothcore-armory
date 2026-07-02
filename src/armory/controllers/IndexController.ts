@@ -52,6 +52,7 @@ export class IndexController {
                         return acc + newZones;
                     }, 0),
             },
+            { table: "account", name: "username" },
 		]);
 		ssp.joins = [
 			{ table1: "characters", column1: "guid", table2: "guild_member", column2: "guid", kind: "LEFT" },
