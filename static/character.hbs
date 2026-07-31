@@ -9,6 +9,10 @@
 
 {{> character-header }}
 
+<div id="progression-container"></div>
+
+<br>
+
 <div id="model-container">
     <div id="equipment-col-left"></div>
     <div id="model"></div>
@@ -83,6 +87,20 @@
             }
         }
         const nbItemRows = Math.max($("#equipment-col-left").children().length, $("#equipment-col-right").children().length);
+
+        Object.keys(charData.progressionSteps).forEach((step) => {
+            if (Number(step) > 1) {
+                $('<span>')
+                    .text('|')
+                    .addClass(`progression-divider`)
+                    .appendTo('#progression-container');
+            }
+
+            $('<span>')
+                .text(charData.progressionSteps[step])
+                .addClass(`progression-item ${charData.progression.includes(Number(step)) ? 'progression-completed' : ''}`)
+                .appendTo('#progression-container');
+        });
 
         function onResize(init = false) {
             const iconSize = $(".icon-size:visible").data("icon-size");

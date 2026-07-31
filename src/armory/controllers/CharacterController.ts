@@ -245,6 +245,7 @@ export class CharacterController {
             return row;
         });
         const mounts = await this.getMounts(realmName, charData.guid);
+        const individualProgression = await this.getIndividualProgression(realmName, charData.guid);
 
         res.render("character.hbs", {
             title: `Arla MMO Armory - ${charData.name}`,
@@ -256,6 +257,27 @@ export class CharacterController {
                 flags: charData.playerFlags,
                 equipment,
                 mounts,
+                progression: individualProgression,
+                progressionSteps: {
+                    1: 'Molten Core',
+                    2: 'Onyxia',
+                    3: 'Blackwing Lair',
+                    4: "Pre Ahn'Qiraj",
+                    5: "War effort",
+                    6: "Ahn'Qiraj",
+                    7: 'Naxxramas',
+                    8: 'Opening of the Dark Portal',
+                    9: "Karazhan, Gruul's Lair, Magtheridon's Lair",
+                    10: 'Serpentshrine Cavern, Tempest Keep',
+                    11: 'Hyjal Summit, Black Temple',
+                    12: "Zul'Aman",
+                    13: 'Sunwell Plateau',
+                    14: 'Naxxramas, Eye of Eternity, Obsidian Sanctum',
+                    15: 'Ulduar',
+                    16: 'Trial of the Crusader',
+                    17: 'Icecrown Citadel',
+                    18: 'Ruby Sanctum',
+                }
             },
         });
 
@@ -1116,6 +1138,21 @@ export class CharacterController {
             row.emblem = Utils.makeEmblemObject(row, false);
             return row;
         });
+    }
+
+    private async getIndividualProgression(realm: string, charGuid: number): Promise<number[]> {
+        const [rows] = await this.armory.getCharactersDb(realm).query({
+            sql: `
+                SELECT quest
+                FROM character_queststatus_rewarded
+                WHERE guid = ? AND quest > 66000 AND quest <= 66018
+                ORDER BY quest ASC
+            `,
+            values: [charGuid],
+            timeout: this.armory.config.dbQueryTimeout,
+        });
+
+        return (rows as { quest: string }[]).map((row) => Number(row.quest) - 66000);
     }
 
     private async getAllCharacters(currentRealm: string): Promise<Array<{name: string, realmName: string, guid: number}>> {

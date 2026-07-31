@@ -28,3 +28,19 @@
 #lbl-hide-transmogs {
     display: none;
 }
+
+.progression-item {
+    display: inline-block;
+    color: #999;
+}
+
+.progression-item.progression-completed {
+    color: lightgreen;
+    font-weight: 500;
+}
+
+.progression-divider {
+    display: inline-block;
+    color: #999;
+    margin: 0 6px;
+}
