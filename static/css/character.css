@@ -1,31 +1,30 @@
 #model-container,
 #equipment-bottom {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #equipment-col-left,
 #equipment-col-right {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #model {
-	max-width: 1000px;
-}
-
-#model,
-#model canvas {
-	touch-action: none;
-	height: 100% !important;
-	width: 100% !important;
+    height: 100% !important;
+    width: 100% !important;
+    max-width: 1000px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-color: #000;
 }
 
 .no-link-text a span {
-	display: none;
+    display: none;
 }
 
 #list-transmogs-container,
 #lbl-hide-transmogs {
-	display: none;
+    display: none;
 }

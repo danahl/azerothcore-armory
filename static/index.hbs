@@ -7,56 +7,56 @@
 
 {{#if (not (equalsLength realms 1))}}
 <div id="select-realm-container">
-	<span class="realm-label">Realm:</span>
-	<div class="select">
-		<select id="select-realm">
-			{{#each realms}}
-			<option>{{this}}</option>
-			{{/each}}
-		</select>
-	</div>
+    <span class="realm-label">Realm:</span>
+    <div class="select">
+        <select id="select-realm">
+            {{#each realms}}
+            <option>{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
 </div>
 {{/if}}
 
 <br>
 
 <table id="results" class="stripe hover row-border">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Online</th>
-			<th>Level</th>
-			<th>Class</th>
-			<th>Race</th>
-			<th>Guild</th>
-			<th>Money</th>
-			<th>Time</th>
-			<th>Zone</th>
-			<th>Areas</th>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Online</th>
+            <th>Level</th>
+            <th>Class</th>
+            <th>Race</th>
+            <th>Guild</th>
+            <th>Money</th>
+            <th>Time</th>
+            <th>Zone</th>
+            <th>Areas</th>
             <th>Account</th>
-		</tr>
-	</thead>
-	<tbody></tbody>
+        </tr>
+    </thead>
+    <tbody></tbody>
 </table>
 
 <script type="application/javascript">
-	$(window).on("load", async () => {
-		let dt;
+    $(window).on("load", async () => {
+        let dt;
 
-		$("#select-realm").on("change", () => {
-			dt.draw();
-		});
+        $("#select-realm").on("change", () => {
+            dt.draw();
+        });
 
         const response = await fetch('/data/meta/zone_names.json');
         const zoneNamesMap = await response.json();
 
-		const formatMoney = (money) => {
+        const formatMoney = (money) => {
             const gold = Math.floor(money / (100 * 100));
             const silver = Math.floor((money / 100) % 100);
             const bronze = Math.floor(money % 100);
 
             return `${gold} 🟡 ${silver} ⚪ ${bronze} 🟠`;
-		};
+        };
         const formatTime = (time) => {
             const hours = Math.floor(time / (60 * 60));
             const minutes = Math.floor((time / 60) % 60);
@@ -72,46 +72,46 @@
             return `${seconds}s`
         };
 
-		dt = $("#results").DataTable({
-			processing: true,
-			serverSide: true,
-			searchDelay: 800,
+        dt = $("#results").DataTable({
+            processing: true,
+            serverSide: true,
+            searchDelay: 800,
             lengthMenu: [50, 100],
-			ajax: {
-				url: `{{websiteRoot}}/search`,
-				data: d => {
-					d.realm = $("#select-realm").val();
-				},
-			},
-			columnDefs: [
-				{
-					targets: 0,
-					render: (name, type, row, meta) => `<a href="{{websiteRoot}}/character/${meta.settings.json.realm}/${name}">${name}</a>`,
-				},
+            ajax: {
+                url: `{{websiteRoot}}/search`,
+                data: d => {
+                    d.realm = $("#select-realm").val();
+                },
+            },
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: (name, type, row, meta) => `<a href="{{websiteRoot}}/character/${meta.settings.json.realm}/${name}">${name}</a>`,
+                },
                 {
                     searchable: false,
                     targets: 1,
                     render: online => online ? "🟢" : "🔴",
                 },
-				{
-					searchable: false,
-					targets: 3,
-					render: data => `<img src="{{aowow}}/static/images/wow/icons/medium/class_${data}.jpg">`,
-				},
-				{
-					searchable: false,
-					targets: 4,
-					render: data => `<img src="{{aowow}}/static/images/wow/icons/medium/race_${data}.jpg">`,
-				},
+                {
+                    searchable: false,
+                    targets: 3,
+                    render: data => `<img src="{{aowow}}/static/images/wow/icons/medium/class_${data}.jpg">`,
+                },
+                {
+                    searchable: false,
+                    targets: 4,
+                    render: data => `<img src="{{aowow}}/static/images/wow/icons/medium/race_${data}.jpg">`,
+                },
                 {
                     targets: 5,
                     render: (guild, type, row, meta) => guild === null ? "" : `<a href="{{websiteRoot}}/guild/${meta.settings.json.realm}/${guild}">${guild}</a>`,
                 },
-				{
-					searchable: false,
-					targets: 6,
-					render: money => formatMoney(money),
-				},
+                {
+                    searchable: false,
+                    targets: 6,
+                    render: money => formatMoney(money),
+                },
                 {
                     searchable: false,
                     targets: 7,
@@ -132,10 +132,10 @@
                     targets: 10,
                     render: username => username,
                 },
-			],
-			responsive: {
-				details: true,
-			},
-		});
-	});
+            ],
+            responsive: {
+                details: true,
+            },
+        });
+    });
 </script>

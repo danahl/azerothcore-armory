@@ -1,96 +1,96 @@
 #categories {
-	padding-right: 20px;
+    padding-right: 20px;
 }
 
 #categories a {
-	display: block;
+    display: block;
 }
 
 .subcategories {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 #achievement-template {
-	display: none;
+    display: none;
 }
 
 #achievements {
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 1em 1.5em;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 1em 1.5em;
 }
 
 .achievement {
-	width: 100%;
+    width: 100%;
 }
 
 .achievement td {
-	text-align: center !important;
-	vertical-align: middle;
+    text-align: center !important;
+    vertical-align: middle;
 }
 
 .achievement.earned {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .achievement .name {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .achievement .name,
 .achievement .points,
 .achievement .description {
-	color: #afafaf;
+    color: #afafaf;
 }
 
 .achievement .icon {
-	filter: grayscale(100%);
-	opacity: 0.7;
+    filter: grayscale(100%);
+    opacity: 0.7;
 }
 
 .achievement.earned .icon {
-	filter: none;
-	opacity: 1;
+    filter: none;
+    opacity: 1;
 }
 
 .achievement.earned .name,
 .achievement.earned .points,
 .achievement.earned .description {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .achievement .points {
-	background-repeat: no-repeat;
-	width: 64px;
-	height: 64px;
-	background-position: -65px -4px;
+    background-repeat: no-repeat;
+    width: 64px;
+    height: 64px;
+    background-position: -65px -4px;
 }
 
 .achievement.earned .points {
-	background-position: 0px -4px;
+    background-position: 0px -4px;
 }
 
 .achievement .points .value {
-	line-height: 32px;
-	position: relative;
-	top: 10px;
-	left: -1px;
+    line-height: 32px;
+    position: relative;
+    top: 10px;
+    left: -1px;
 }
 
 .achievement .earned-date {
-	display: inline-block;
-	line-height: 32px;
-	position: relative;
-	top: 4px;
-	left: 50%;
-	transform: translateX(-50%);
+    display: inline-block;
+    line-height: 32px;
+    position: relative;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .achievement .points.no-points .value {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 #total-points-icon {
-	position: relative;
-	margin-left: 2px;
+    position: relative;
+    margin-left: 2px;
 }
