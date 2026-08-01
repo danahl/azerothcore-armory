@@ -29,8 +29,11 @@
     display: none;
 }
 
+#progression-container .is-bold {
+    font-weight: bold;
+}
+
 .progression-item {
-    display: inline-block;
     color: #999;
 }
 

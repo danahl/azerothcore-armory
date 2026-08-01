@@ -5,8 +5,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-
-<!-- SUMMARY -->
 <div align="center">
     <h1 align="center">AzerothCore Armory</h1>
     <p align="center">
@@ -22,8 +20,6 @@
     </p>
 </div>
 
-
-<!-- TABLE OF CONTENTS -->
 <details>
     <summary>Table of Contents</summary>
 
@@ -58,8 +54,6 @@
 </ol>
 </details>
 
-
-<!-- ABOUT -->
 ## About
 
 AzerothCore-Armory is a website that enables you to view your [AzerothCore][github-ac] server's characters and guilds.  
@@ -76,7 +70,6 @@ I also noticed that such a tool was frequently requested in the AzerothCore Disc
 ![Guild page](readme/img/guild.png)
 </details>
 
-
 ### Built With
 
 * [Node.js](https://nodejs.org/)
@@ -89,8 +82,6 @@ I also noticed that such a tool was frequently requested in the AzerothCore Disc
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
@@ -159,8 +150,6 @@ I also noticed that such a tool was frequently requested in the AzerothCore Disc
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- USAGE -->
 ## Usage
 
 Build the application:
@@ -237,28 +226,27 @@ Make sure you replace the URL `http://localhost:48733` with your Armory's URL (t
 ```
 </details>
 
-
 ### Demo
 
 This repository is used in production over at [ChromieCraft](https://www.chromiecraft.com/armory), check it out there!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- FEATURES -->
 ## Features
 
 - [X] Characters list / search page
 - [X] Character page
     - [X] Online/offline status
     - [X] Equipment with tooltips
-    - [X] 3D model, including mounts and [transmogrifications](https://github.com/azerothcore/mod-transmog)
+    - [ ] 3D model, including mounts and [transmogrifications](https://github.com/azerothcore/mod-transmog). SUPPORT REMOVED AND REPLACED WITH ART (see Race - class combinations)
     - [X] Talent trees, including glyphs and dual spec support
     - [X] Achievements
     - [X] PvP statistics, including arena teams
     - [ ] Statistics (from the achievements panel in-game)
-    - [ ] Reputations
+    - [X] Reputations
     - [ ] Stats (from the character sheet, i.e. health, mana, etc)
+    - [X] Quests (active and completed)
+    - [X] Compare quests with another character
 - [X] Guild page
     - [X] Guild emblem
     - [X] Members list
@@ -273,8 +261,85 @@ See the [open issues](https://github.com/r-o-b-o-t-o/azerothcore-armory/issues) 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Race - class combinations
 
-<!-- CONTRIBUTING -->
+These are used for the race class combinations in `static/img/backgrounds`, where the file should be named for example `3-1.jpg` for a dwarf warrior.
+
+- [x] Human
+    - [x] Death Knight - 1-6
+    - [x] Mage - 1-8
+    - [x] Paladin - 1-2
+    - [x] Priest - 1-5
+    - [x] Rogue - 1-4
+    - [x] Warlock - 1-9
+    - [x] Warrior - 1-1
+- [x] Dwarf
+    - [x] Death Knight - 3-6
+    - [x] Hunter - 3-3
+    - [x] Paladin - 3-2
+    - [x] Priest - 3-5
+    - [x] Rogue - 3-4
+    - [x] Warrior - 3-1
+- [x] Night Elf
+    - [x] Death Knight - 4-6
+    - [x] Druid - 4-11
+    - [x] Hunter - 4-3
+    - [x] Priest - 4-5
+    - [x] Rogue - 4-4
+    - [x] Warrior - 4-1
+- [x] Gnome
+    - [x] Death Knight - 7-6
+    - [x] Mage - 7-8
+    - [x] Rogue - 7-4
+    - [x] Warlock - 7-9
+    - [x] Warrior - 7-1
+- [x] Draenei
+    - [x] Death Knight - 11-6
+    - [x] Hunter - 11-3
+    - [x] Mage - 11-8
+    - [x] Paladin - 11-2
+    - [x] Priest - 11-5
+    - [x] Shaman - 11-7
+    - [x] Warrior - 11-1
+- [x] Orc
+    - [x] Death Knight - 2-6
+    - [x] Hunter - 2-3
+    - [x] Rogue - 2-4
+    - [x] Shaman - 2-7
+    - [x] Warlock - 2-9
+    - [x] Warrior - 2-1
+- [x] Undead
+    - [x] Death Knight - 5-6
+    - [x] Mage - 5-8
+    - [x] Priest - 5-5
+    - [x] Rogue - 5-4
+    - [x] Warlock - 5-9
+    - [x] Warrior - 5-1
+- [x] Tauren
+    - [x] Death Knight - 6-6
+    - [x] Druid - 6-11
+    - [x] Hunter - 6-3
+    - [x] Shaman - 6-7
+    - [x] Warrior - 6-1
+- [x] Troll
+    - [x] Death Knight - 8-6
+    - [x] Hunter - 8-3
+    - [x] Mage - 8-8
+    - [x] Priest - 8-5
+    - [x] Rogue - 8-4
+    - [x] Shaman - 8-7
+    - [x] Warrior - 8-1
+- [x] Blood Elf
+    - [x] Death Knight - 10-6
+    - [x] Hunter - 10-3
+    - [x] Mage - 10-8
+    - [x] Paladin - 10-2
+    - [x] Priest - 10-5
+    - [x] Rogue - 10-4
+    - [x] Warlock - 10-9
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Contributing
 
 Any and all contributions are **greatly appreciated**.
@@ -282,7 +347,6 @@ Any and all contributions are **greatly appreciated**.
 If you have a suggestion that would make this project better, feel free to fork the repository and create a Pull Request. You can also open a [Feature Request][feature-request].
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- SUPPORT -->
 ## Show your Support
@@ -293,25 +357,18 @@ If you have a suggestion that would make this project better, feel free to fork 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See the [`LICENSE`][license-url] file for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- CONTACT -->
 ## Contact
 
 <img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white"/> Feel free to get in touch with me on Discord: `roboto_`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-<!-- MARKDOWN LINKS -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [github-ac]: https://github.com/azerothcore/azerothcore-wotlk
 [stars-shield]: https://img.shields.io/github/stars/r-o-b-o-t-o/azerothcore-armory.svg?style=flat
 [stars-url]: https://github.com/r-o-b-o-t-o/azerothcore-armory/stargazers

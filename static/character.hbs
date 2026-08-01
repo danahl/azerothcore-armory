@@ -9,7 +9,20 @@
 
 {{> character-header }}
 
-<div id="progression-container"></div>
+<div id="progression-container">
+    <h3 class="is-bold">
+        <a href="https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/List-of-Progression-Tiers">Progression</a>
+    </h3>
+    <div id="progression-vanilla">
+        <span class="is-bold">Vanilla:</span>&nbsp;
+    </div>
+    <div id="progression-tbc">
+        <span class="is-bold">TBC:</span>&nbsp;
+    </div>
+    <div id="progression-wotlk">
+        <span class="is-bold">WotLK:</span>&nbsp;
+    </div>
+</div>
 
 <br>
 
@@ -88,18 +101,25 @@
         }
         const nbItemRows = Math.max($("#equipment-col-left").children().length, $("#equipment-col-right").children().length);
 
+        let appendTo = '#progression-vanilla';
         Object.keys(charData.progressionSteps).forEach((step) => {
-            if (Number(step) > 1) {
+            if (Number(step) === 8) {
+                appendTo = '#progression-tbc';
+            } else if (Number(step) === 14) {
+                appendTo = '#progression-wotlk';
+            }
+
+            if (![1, 8, 14].includes(Number(step))) {
                 $('<span>')
                     .text('|')
                     .addClass(`progression-divider`)
-                    .appendTo('#progression-container');
+                    .appendTo(appendTo);
             }
 
             $('<span>')
                 .text(charData.progressionSteps[step])
                 .addClass(`progression-item ${charData.progression.includes(Number(step)) ? 'progression-completed' : ''}`)
-                .appendTo('#progression-container');
+                .appendTo(appendTo);
         });
 
         function onResize(init = false) {
