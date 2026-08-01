@@ -33,6 +33,7 @@
             <th>Time</th>
             <th>Zone</th>
             <th>Areas</th>
+            <th>Progression</th>
             <th>Account</th>
         </tr>
     </thead>
@@ -124,12 +125,19 @@
                 },
                 {
                     searchable: false,
+                    orderable: false,
                     targets: 9,
                     render: exploredZones => exploredZones,
                 },
                 {
-                    searchable: true,
+                    searchable: false,
+                    orderable: false,
                     targets: 10,
+                    render: progression => `${progression}/18`,
+                },
+                {
+                    searchable: true,
+                    targets: 11,
                     render: username => username,
                 },
             ],

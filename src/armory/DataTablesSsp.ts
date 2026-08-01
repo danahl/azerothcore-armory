@@ -14,6 +14,7 @@ export interface IColumnSettings {
     formatter?: (data: string | number | null, row: unknown) => string;
     table?: string;
     database?: string;
+    subquery?: string;
 }
 
 export interface IColumnJoin {
@@ -97,7 +98,12 @@ export class DataTablesSsp {
     }
 
     private colSettingsToStr(colSettings: IColumnSettings) {
+        if (colSettings.subquery) {
+            return `(${colSettings.subquery}) AS ${colSettings.name}`
+        }
+
         const db = colSettings.database ? "`" + colSettings.database + "`." : "";
+
         return `${db}\`${colSettings.table || this.table}\`.\`${colSettings.name}\``;
     }
 

@@ -52,6 +52,15 @@ export class IndexController {
                         return acc + newZones;
                     }, 0),
             },
+            {
+                name: 'quests',
+                subquery: `
+                    SELECT COUNT(quest)
+                    FROM character_queststatus_rewarded
+                    WHERE guid = characters.guid AND quest > 66000 AND quest <= 66018
+                `,
+                formatter: (quests) => String(quests),
+            },
             { table: "account", name: "username" },
         ]);
         ssp.joins = [
