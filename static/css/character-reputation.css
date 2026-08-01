@@ -61,6 +61,7 @@
     background-color: #4CAF50; /* More muted green */
 }
 
+.progress-bar.Unfriendly,
 .progress-bar.Hostile,
 .progress-bar.Hated {
     background-color: #D32F2F; /* More muted red */

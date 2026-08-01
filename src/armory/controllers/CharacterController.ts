@@ -539,80 +539,80 @@ export class CharacterController {
 
     private getReputationStanding(value: number): string {
         if (value < -6000) {
-            return 'Hated'; // These are probably not correct, but I don't have a character to test against
+            return 'Hated';
         }
         if (value < -3000) {
-            return 'Hostile'; // These are probably not correct, but I don't have a character to test against
+            return 'Hostile';
         }
         if (value < 0) {
-            return 'Unfriendly'; // These are probably not correct, but I don't have a character to test against
+            return 'Unfriendly';
         }
-        if (value < 1000) {
-            return 'Neutral'; // These are probably not correct, but I don't have a character to test against
+        if (value < 3000) {
+            return 'Neutral';
         }
-        if (value < 6000) {
+        if (value < 9000) {
             return 'Friendly';
         }
-        if (value < 19000) {
+        if (value < 21000) {
             return 'Honored';
         }
-        if (value < 40000) {
+        if (value < 42000) {
             return 'Revered';
         }
 
-        return 'Exalted'; // These are probably not correct, but I don't have a character to test against
+        return 'Exalted';
     }
 
     private getReputationMax(value: number): number {
         if (value < -6000) {
-            return -6000; // These are probably not correct, but I don't have a character to test against
+            return 36000;
         }
         if (value < -3000) {
-            return -3000; // These are probably not correct, but I don't have a character to test against
-        }
-        if (value < 0) {
-            return 0; // These are probably not correct, but I don't have a character to test against
-        }
-        if (value < 1000) {
             return 3000;
         }
-        if (value < 6000) {
+        if (value < 0) {
+            return 3000;
+        }
+        if (value < 3000) {
+            return 3000;
+        }
+        if (value < 9000) {
             return 6000;
         }
-        if (value < 12000) {
+        if (value < 21000) {
             return 12000;
         }
-        if (value < 21000) {
+        if (value < 42000) {
             return 21000;
         }
 
-        return 40000; // This might not be right, but I dont have an exalted character to test against
+        return 1000;
     }
 
     private getReputationInGrade(value: number): number {
         if (value < -6000) {
-            return value + 3000; // These are probably not correct, but I don't have a character to test against
+            return Math.abs(value + 6000);
         }
         if (value < -3000) {
-            return value; // These are probably not correct, but I don't have a character to test against
+            return Math.abs(value + 3000);
         }
         if (value < 0) {
-            return value; // These are probably not correct, but I don't have a character to test against
+            return Math.abs(value);
         }
-        if (value < 1000) {
-            return value + 2000; // These are probably not correct, but I don't have a character to test against
+        if (value < 3000) {
+            return value;
         }
-        if (value < 6000) {
-            return value - 1000;
-        }
-        if (value < 12000) {
-            return value - 5900;  // For some reason I needed to remove an extra 100 from this one to get it to match the client
+        if (value < 9000) {
+            return value - 3000;
         }
         if (value < 21000) {
-            return value - 16900; // For some reason I needed to remove an extra 100 from this one to get it to match the client
+            return value - 9000;
+        }
+        if (value < 42000) {
+            return value - 21000;
         }
 
-        return value - 21100; // This might not be right, but I dont have an exalted character to test against
+        return value - 42000;
     }
 
     private getExpansionId(factionId: number): number {
