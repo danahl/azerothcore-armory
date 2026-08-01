@@ -60,4 +60,23 @@ export class Utils {
             background: obj.background.toString().padStart(padLength, "0"),
         };
     }
+
+    public static formatMoney(money: number): string {
+        return [
+            Math.floor(money / (100 * 100)),
+            '🟡',
+            Math.floor((money / 100) % 100),
+            '⚪',
+            Math.floor(money % 100),
+            '🟠',
+        ].join(' ');
+    }
+
+    public static formatTime(time: number): string {
+        return [
+            `${Math.floor(time / (60 * 60))}h`,
+            `${Math.floor((time / 60) % 60)}m`,
+            `${Math.floor(time % 60)}s`,
+        ].join(' ')
+    }
 }

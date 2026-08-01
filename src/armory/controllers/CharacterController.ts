@@ -505,6 +505,38 @@ export class CharacterController {
         });
     }
 
+    public async account(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
+        const realmName = req.params.realm;
+        const charName = req.params.name;
+
+        const realm = this.armory.getRealm(realmName);
+        if (realm === undefined) {
+            return next(404);
+        }
+
+        const charData = await this.getCharacterData(realm, charName);
+        if (charData === null) {
+            return next(404);
+        }
+
+        const characters = await this.getAccountCharacters(realmName, charData.guid);
+
+        const total = {
+            money: Utils.formatMoney(characters.reduce((acc, character) => acc + character.money, 0)),
+            totaltime: Utils.formatTime(characters.reduce((acc, character) => acc + character.totaltime, 0)),
+        };
+
+        res.render("character-account.hbs", {
+            title: `Armory - ${charData.name} - account`,
+            ...this.makeSharedDataObject(realm, charData),
+            data: {
+                realmName,
+                characters,
+                total,
+            },
+        });
+    }
+
     private async getReputations(realm: string, character: number): Promise<IReputation[]> {
         const [rows] = await this.armory.getCharactersDb(realm).query({
             sql: `
@@ -1152,7 +1184,7 @@ export class CharacterController {
             timeout: this.armory.config.dbQueryTimeout,
         });
 
-        return (rows as { quest: string }[]).map((row) => Number(row.quest) - 66000);
+        return (rows as RowDataPacket[]).map((row) => Number(row.quest) - 66000);
     }
 
     private async getAllCharacters(currentRealm: string): Promise<Array<{name: string, realmName: string, guid: number}>> {
@@ -1173,6 +1205,49 @@ export class CharacterController {
             name: row.name,
             guid: row.guid,
             realmName: currentRealm
+        }));
+    }
+
+    private async getAccountCharacters(realm: string, charGuid: number): Promise<Record<string, any>[]> {
+        const [rows] = await this.armory.getCharactersDb(realm).query({
+            sql: `
+                SELECT account
+                FROM characters
+                WHERE guid = ?
+                LIMIT 1
+            `,
+            values: [charGuid],
+            timeout: this.armory.config.dbQueryTimeout,
+        });
+
+        if (!rows?.[0]) {
+            return [];
+        }
+
+        const accountId = (rows as RowDataPacket[])[0].account;
+
+        const [characters] = await this.armory.getCharactersDb(realm).query({
+            sql: `
+                SELECT name, race, class, gender, level, money, online, totaltime, zone
+                FROM characters
+                WHERE account = ? AND deleteInfos_Account IS NULL
+                ORDER BY name ASC
+            `,
+            values: [accountId],
+            timeout: this.armory.config.dbQueryTimeout,
+        });
+
+        return (characters as RowDataPacket[]).map((row) => ({
+            name: row.name,
+            race: RaceDisplayName[row.race],
+            class: ClassDisplayName[row.class],
+            level: row.level,
+            money: row.money,
+            moneyFormatted: Utils.formatMoney(row.money),
+            onlineFormatted: Number(row.online) === 1 ? '🟢' : '🔴',
+            totaltime: row.totaltime,
+            totaltimeFormatted: Utils.formatTime(row.totaltime),
+            zone: this.getZoneName(row.zone),
         }));
     }
 }

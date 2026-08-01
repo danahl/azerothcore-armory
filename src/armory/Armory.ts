@@ -208,6 +208,7 @@ export class Armory {
         app.get("/character/:realm/:name/reputation", this.wrapRoute(charsController.reputation.bind(charsController)));
         app.get("/character/:realm/:name/quests", this.wrapRoute(charsController.quests.bind(charsController)));
         app.get("/character/:realm/:name/quests/compare/:otherRealm/:otherName", this.wrapRoute(charsController.questsCompare.bind(charsController)));
+        app.get("/character/:realm/:name/account", this.wrapRoute(charsController.account.bind(charsController)));
 
         const guildsController = new GuildController(this);
         app.get("/guild/:realm/:name", this.wrapRoute(guildsController.guild.bind(guildsController)));
