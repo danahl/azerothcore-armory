@@ -1248,6 +1248,7 @@ export class CharacterController {
             totaltime: row.totaltime,
             totaltimeFormatted: Utils.formatTime(row.totaltime),
             zone: this.getZoneName(row.zone),
+            realmName: realm,
         }));
     }
 }

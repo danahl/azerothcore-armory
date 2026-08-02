@@ -26,3 +26,7 @@
 .is-bold {
     font-weight: 600;
 }
+
+.currency {
+    font-size: 10px;
+}

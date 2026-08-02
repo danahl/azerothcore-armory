@@ -9,19 +9,32 @@
 <div class="accounts-container">
     {{#each data.characters}}
         <a
-            href="/character/{{data.realmName}}/{{this.name}}"
+            href="/character/{{this.realmName}}/{{this.name}}"
             class="account-item"
         >
             <h3 class="row">{{this.onlineFormatted}} <span class="is-bold is-size-5">{{this.name}}</span></h3>
             <span class="row">Level {{this.level}} {{this.race}} {{this.class}}</span>
             <span class="row">{{this.totaltimeFormatted}}</span>
-            <span class="row">{{this.moneyFormatted}}</span>
+            <span class="money">{{this.moneyFormatted}}</span>
             <span class="row">{{this.zone}}</span>
         </a>
     {{/each}}
 </div>
 
 <div class="accounts-total">
-    <span class="is-bold">Total money:</span> <span>{{data.total.money}}</span><br>
+    <span class="is-bold">Total money:</span> <span class="money">{{data.total.money}}</span><br>
     <span class="is-bold">Total time:</span> <span>{{data.total.totaltime}}</span>
 </div>
+
+<script>
+    $(window).on("load", async () => {
+        $('.money').each(function () {
+            const text = $(this).text()
+                .replace('🟡', '<span class="currency">🟡</span>')
+                .replace('⚪', '<span class="currency">⚪</span>')
+                .replace('🟠', '<span class="currency">🟠</span>');
+
+            $(this).html(text);
+        });
+    });
+</script>
