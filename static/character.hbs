@@ -48,6 +48,101 @@
     <a href="{{aowow}}/?spell=10"></a>
 </div>
 
+<div class="character-stats">
+    <div class="character-stat-column">
+        <div class="character-stat-column-title">Primary</div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Health:</span> {{data.stats.maxhealth}}
+        </div>
+        <div class="character-stat">
+            {{#if (eq data.class 4)}}
+            <span style="font-weight: bold">Energy:</span> {{data.stats.maxpower4}}
+            {{else if (eq data.class 1)}}
+            <span style="font-weight: bold">Rage:</span> {{data.stats.maxpower2}}
+            {{else if (eq data.class 6)}}
+            <span style="font-weight: bold">Runic power:</span> {{data.stats.maxpower7}}
+            {{else}}
+            <span style="font-weight: bold">Mana:</span> {{data.stats.maxpower1}}
+            {{/if}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Strength:</span> {{data.stats.strength}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Agility:</span> {{data.stats.agility}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Stamina:</span> {{data.stats.stamina}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Intellect:</span> {{data.stats.intellect}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Spirit:</span> {{data.stats.spirit}}
+        </div>
+    </div>
+
+    <div class="character-stat-column">
+        <div class="character-stat-column-title">Resistances</div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Holy:</span> {{data.stats.resHoly}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Fire:</span> {{data.stats.resFire}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Nature:</span> {{data.stats.resNature}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Frost:</span> {{data.stats.resFrost}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Shadow:</span> {{data.stats.resShadow}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Arcane:</span> {{data.stats.resArcane}}
+        </div>
+    </div>
+
+    <div class="character-stat-column">
+        <div class="character-stat-column-title">Defence</div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Armor:</span> {{data.stats.armor}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Block:</span> {{data.stats.blockPct}}%
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Dodge:</span> {{data.stats.dodgePct}}%
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Parry:</span> {{data.stats.parryPct}}%
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Resilience:</span> {{data.stats.resilience}}
+        </div>
+    </div>
+
+    <div class="character-stat-column">
+        <div class="character-stat-column-title">Attack</div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Melee crit:</span> {{data.stats.critPct}}%
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Attack power:</span> {{data.stats.attackPower}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Ranged crit:</span> {{data.stats.rangedCritPct}}%
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Ranged power:</span> {{data.stats.rangedAttackPower}}
+        </div>
+        <div class="character-stat">
+            <span style="font-weight: bold">Spell power:</span> {{data.stats.spellPower}}
+        </div>
+    </div>
+</div>
+
 <script type="application/javascript">
     $(window).on("load", () => {
         const $itemSlotTemplate = $("#item-slot-template").detach().removeAttr("id");

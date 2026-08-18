@@ -246,6 +246,7 @@ export class CharacterController {
         });
         const mounts = await this.getMounts(realmName, charData.guid);
         const individualProgression = await this.getIndividualProgression(realmName, charData.guid);
+        const stats = await this.getCharacterStats(realmName, charData.guid);
 
         res.render("character.hbs", {
             title: `Arla MMO Armory - ${charData.name}`,
@@ -277,7 +278,8 @@ export class CharacterController {
                     16: 'Trial of the Crusader',
                     17: 'Icecrown Citadel',
                     18: 'Ruby Sanctum',
-                }
+                },
+                stats,
             },
         });
 
@@ -1185,6 +1187,36 @@ export class CharacterController {
         });
 
         return (rows as RowDataPacket[]).map((row) => Number(row.quest) - 66000);
+    }
+
+    private async getCharacterStats(realm: string, charGuid: number): Promise<Record<string, string | number>> {
+        const [rows] = await this.armory.getCharactersDb(realm).query({
+            sql: `
+                SELECT *
+                FROM character_stats
+                WHERE guid = ?
+                LIMIT 1
+            `,
+            values: [charGuid],
+            timeout: this.armory.config.dbQueryTimeout,
+        });
+
+        const stats: Record<string, string | number> = (rows as RowDataPacket[])[0] ?? {};
+        if (Object.keys(stats).length === 0) {
+            return stats;
+        }
+
+        stats.maxpower2 = Math.floor(Number(stats.maxpower2) / 10);
+        stats.maxpower7 = Math.floor(Number(stats.maxpower7) / 10);
+
+        stats.blockPct = Math.round(Number(stats.blockPct) * 100) / 100;
+        stats.dodgePct = Math.round(Number(stats.dodgePct) * 100) / 100;
+        stats.parryPct = Math.round(Number(stats.parryPct) * 100) / 100;
+
+        stats.critPct = Math.round(Number(stats.critPct) * 100) / 100;
+        stats.rangedCritPct = Math.round(Number(stats.rangedCritPct) * 100) / 100;
+
+        return stats;
     }
 
     private async getAllCharacters(currentRealm: string): Promise<Array<{name: string, realmName: string, guid: number}>> {

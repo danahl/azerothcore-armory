@@ -47,3 +47,33 @@
     color: #999;
     margin: 0 6px;
 }
+
+.character-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.character-stat-column {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 16px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+}
+
+.character-stat-column-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.character-stat {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+.character-stat span {
+    color: gold;
+}

@@ -91,6 +91,7 @@ export class IndexController {
             kind: "LEFT",
         });
         ssp = ssp.where("`account`.`username` NOT LIKE 'RNDBOT%' AND `account`.`username` != 'AHBOT'");
+        ssp = ssp.where("`characters`.`totaltime` > 0");
 
         const result = await ssp.where("`deleteInfos_Account` IS NULL").run(this.armory.config.dbQueryTimeout);
 
